@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div data-scroll-container class="wrapper">
     <Navbar />
     <div class="hero-wrapper">
       <div class="container-title">
@@ -30,6 +30,10 @@
 
 <script setup>
 import Navbar from './components/Navbar.vue';
+import LocomotiveScroll from 'locomotive-scroll';
+
+const scroll = new LocomotiveScroll();
+
 </script>
 
 <style scoped>
