@@ -12,6 +12,9 @@
           </p>
         </div>
       </div>
+      <div class="container-star">
+        <img ref="imgStar" src="./assets/star.png" alt="star">
+      </div>
       <div class="container-svg">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M14.8382 9.13358L12.2744 0L9.70836 9.13358L0 12L9.70836 14.5087L12.2744 24L14.6552 14.5087L24 12L14.8382 9.13358Z" fill="black"/>
@@ -31,8 +34,22 @@
 <script setup>
 import Navbar from './components/Navbar.vue';
 import LocomotiveScroll from 'locomotive-scroll';
+import { ref, onMounted } from 'vue';
 
+const scrollY = ref(0);
 const scroll = new LocomotiveScroll();
+let imgStar = ref();
+
+function handleScroll() {
+  scrollY.value = window.scrollY;
+  imgStar.value.style.transform = `rotate(${scrollY.value/5}deg)`;
+  imgStar.value.style.transform = 'all linear';
+  imgStar.value.style.position = 'fixed';
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+})
 
 </script>
 
@@ -71,6 +88,17 @@ const scroll = new LocomotiveScroll();
 
 .container-title div p{
   margin: 0;
+}
+
+.container-star img{
+  position: absolute;
+  top: 20%;
+  right: 50%;
+  left: 25%;
+  bottom: 50%;
+  width: 50%;
+  height: auto;
+  z-index: -1;
 }
 
 .container-svg{

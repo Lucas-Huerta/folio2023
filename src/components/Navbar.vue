@@ -1,5 +1,5 @@
 <template>
-    <nav class="nav-wrapper">
+    <nav ref="navbar" class="nav-wrapper">
         <div class="nav-left">
             <h1>
                 Lucas Huerta
@@ -17,6 +17,22 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
+
+let navbar = ref();
+const scrollY = ref(0)
+
+function handleScroll() {
+  scrollY.value = window.scrollY;
+  if (scrollY.value > 0) {
+    navbar.value.style.zIndex = 10;
+    navbar.value.style.backgroundColor = 'white';
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+})
 </script>
 
 <style scoped>
