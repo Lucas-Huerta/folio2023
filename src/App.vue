@@ -1,5 +1,5 @@
 <template>
-  <div data-scroll-container class="wrapper">
+  <div ref="wrapper" class="wrapper">
     <Navbar />
     <section class="hero-wrapper">
       <div class="container-title">
@@ -28,9 +28,19 @@
         </div>
       </div>
     </section>
-    <section class="wrapper-project">
-      <Project v-for="project in tabProject" :key="project" :projet="project"/>
-    </section>
+    <main class="main">
+      <section class="wrapper-project">
+        <Project v-for="project in tabProject" :key="project" :projet="project"/>
+      </section>
+      <section class="wrapper-competences">
+        <div data-scroll data-scroll-direction="horizontal" data-scroll-speed="6" class="high">
+          <span v-for="comp in tabHighComp" :key="comp">{{ comp }}</span>
+        </div>
+        <div data-scroll data-scroll-direction="horizontal" data-scroll-speed="-6" class="bottom">
+          <span v-for="comp in tabBottomComp" :key="comp">{{ comp }}</span>
+        </div>
+      </section>
+    </main>
   </div>
 </template>
 
@@ -40,8 +50,8 @@ import Project from './components/Project.vue';
 import LocomotiveScroll from 'locomotive-scroll';
 import { ref, onMounted } from 'vue';
 
-const scrollY = ref(0);
-const scroll = new LocomotiveScroll();
+const wrapper = ref();
+// const scrollY = ref(0);
 let imgStar = ref();
 
 let tabProject = ref([
@@ -72,15 +82,29 @@ let tabProject = ref([
   }
 ])
 
-function handleScroll() {
-  scrollY.value = window.scrollY;
-  imgStar.value.style.transform = `rotate(${scrollY.value/5}deg)`;
-  imgStar.value.style.transform = 'all linear';
-  imgStar.value.style.position = 'fixed';
+let tabHighComp = ref(["Fullstack developper", "Digital developper", "Internet chil", "Fullstack developper", "Digital developper", "Internet chil", "Fullstack developper", "Digital developper", "Internet chil"])
+let tabBottomComp = ref(["Vue Js", "Nuxt Js", "Node Js", "CI/CD", "Vue Js", "Nuxt Js", "Node Js", "CI/CD", "Vue Js", "Nuxt Js", "Node Js", "CI/CD"])
+
+// const handleScroll = async() => {
+//   scrollY.value = window.scrollY;
+//   imgStar.value.style.transform = `rotate(${scrollY.value/5}deg)`;
+//   imgStar.value.style.transform = 'all linear';
+//   imgStar.value.style.position = 'fixed';
+// }
+
+const locomotive = async() => {
+  await new LocomotiveScroll({
+    // el: wrapper.value,
+    el: document.querySelector('[data-scroll-container]'),
+    // el: document.getElementById('app'),
+    smooth: true, 
+  });
 }
 
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
+onMounted(async() => {
+  // await handleScroll()
+  // window.addEventListener('scroll', handleScroll);
+  await locomotive();
 })
 
 </script>
@@ -170,6 +194,12 @@ onMounted(() => {
   z-index: 3;
 }
 
+.main{
+  height: max-content;
+  background-color: var(--black-color);
+  width: 100%;
+}
+
 .wrapper-project{
   background-color: var(--black-color);
   width: 100%;
@@ -177,5 +207,33 @@ onMounted(() => {
   margin-top: 40vh;
   z-index: 4;
   position: relative;
+}
+
+.wrapper-competences{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-bottom: 50vh;
+  color: white;
+}
+
+.wrapper-competences .high,
+.wrapper-competences .bottom{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: max-content;
+  /* overflow: auto; */
+  gap: 10vw;
+}
+
+.wrapper-competences .high{
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper-competences span{
+  font-family: "Dahlia";
+  font-size: 90px;
 }
 </style>
