@@ -1,7 +1,7 @@
 <template>
   <div data-scroll-container class="wrapper">
     <Navbar />
-    <div class="hero-wrapper">
+    <section class="hero-wrapper">
       <div class="container-title">
         <div>
           <h1>
@@ -27,18 +27,50 @@
         <div class="ellipse">
         </div>
       </div>
-    </div>
+    </section>
+    <section class="wrapper-project">
+      <Project v-for="project in tabProject" :key="project" :projet="project"/>
+    </section>
   </div>
 </template>
 
 <script setup>
 import Navbar from './components/Navbar.vue';
+import Project from './components/Project.vue';
 import LocomotiveScroll from 'locomotive-scroll';
 import { ref, onMounted } from 'vue';
 
 const scrollY = ref(0);
 const scroll = new LocomotiveScroll();
 let imgStar = ref();
+
+let tabProject = ref([
+  {
+    nom: "Calceare", 
+    tag: "Student project", 
+    image: ""
+  },
+  {
+    nom: "Art", 
+    tag: "Personal project", 
+    image: ""
+  }, 
+  {
+    nom: "La fif", 
+    tag: "Professional project", 
+    image: ""
+  }, 
+  {
+    nom: "Usermind", 
+    tag: "Professional project", 
+    image: ""
+  }, 
+  {
+    nom: "Le défi 24 heures", 
+    tag: "Student project", 
+    image: ""
+  }
+])
 
 function handleScroll() {
   scrollY.value = window.scrollY;
@@ -56,13 +88,14 @@ onMounted(() => {
 <style scoped>
 .wrapper{
   width: 100%;
-  height: 100vh;
+  /* height: 100vh; */
   position: relative;
 }
 
 .hero-wrapper{
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  position: relative
 }
 
 .hero-wrapper h1{
@@ -135,5 +168,14 @@ onMounted(() => {
   -webkit-transform-origin: center center;
   transform-origin: center center;
   z-index: 3;
+}
+
+.wrapper-project{
+  background-color: var(--black-color);
+  width: 100%;
+  height: 100vh;
+  margin-top: 40vh;
+  z-index: 4;
+  position: relative;
 }
 </style>
