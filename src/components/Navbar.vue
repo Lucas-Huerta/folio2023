@@ -6,10 +6,10 @@
             </h1>
         </div>
         <div class="nav-right">
-            <p>
+            <p @click="yesScroll()">
                 Works
             </p>
-            <p>
+            <p @click="yesScroll()">
                 Contact
             </p>
         </div>
@@ -19,20 +19,26 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 
-let navbar = ref();
-const scrollY = ref(0)
+const emits = defineEmits(['scrollProject', 'scrollContact'])
 
-function handleScroll() {
-  scrollY.value = window.scrollY;
-  if (scrollY.value > 0) {
-    navbar.value.style.zIndex = 10;
-    navbar.value.style.backgroundColor = 'white';
-  }
+let navbar = ref();
+// const scrollY = ref(0);
+
+const yesScroll = () => {
+    emits('scrollProject');
 }
 
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
-})
+// function handleScroll() {
+//   scrollY.value = window.scrollY;
+//   if (scrollY.value > 0) {
+//     navbar.value.style.zIndex = 10;
+//     navbar.value.style.backgroundColor = 'white';
+//   }
+// }
+
+// onMounted(() => {
+//   window.addEventListener('scroll', handleScroll)
+// })
 </script>
 
 <style scoped>
@@ -48,7 +54,7 @@ onMounted(() => {
     border-bottom: 2px solid black;
     padding-top: 2vh;
     text-transform: uppercase;
-    position: fixed;
+    /* position: fixed; */
 }
 .nav-right{
     display: flex;

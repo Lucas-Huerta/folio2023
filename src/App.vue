@@ -1,6 +1,6 @@
 <template>
   <div ref="wrapper" class="wrapper">
-    <Navbar />
+    <Navbar @scrollProject="scrollProject" @scrollContact="scrollProject" />
     <section class="hero-wrapper">
       <div class="container-title">
         <div>
@@ -30,7 +30,7 @@
     </section>
     <main class="main">
       <div class="bg">
-        <section class="wrapper-project">
+        <section data-scroll data-scroll-id="project" id="project" class="wrapper-project">
           <Project v-for="project in tabProject" :key="project" :projet="project"/>
         </section>
         <section class="wrapper-competences">
@@ -60,7 +60,7 @@
             <span>+</span><span>3</span><span>3</span><span>7</span><span>8</span><span>3</span><span>8</span><span>0</span><span>6</span><span>3</span><span>5</span><span>7</span>
           </div>
           <div class="row-infos">
-            <p>Spotify</p> <p>Playlist</p>
+            <p>Spotify</p> <a href="https://open.spotify.com/playlist/1PA80CpOPlx749kXu7AVsV?si=eee6b25097124095" target="_blank">Playlist</a>
           </div>
         </div>
       </section>
@@ -76,7 +76,7 @@
           </div>
           <div class="bottom-section">
             <div class="container-contact">
-              <p>Contact me</p>
+              <a href="mailto:huertalucas13@gmail.com">Contact me </a>
             </div>
             <div class="container-bottom">
               <div class="date">
@@ -106,7 +106,7 @@
 import Navbar from './components/Navbar.vue';
 import Project from './components/Project.vue';
 import LocomotiveScroll from 'locomotive-scroll';
-import { ref, onMounted, onUpdated } from 'vue';
+import { ref, onMounted } from 'vue';
 
 const wrapper = ref();
 // const scrollY = ref(0);
@@ -114,36 +114,68 @@ let imgStar = ref();
 
 let tabProject = ref([
   {
-    nom: "Calceare", 
-    tag: "Student project", 
-    image: ""
-  },
-  {
     nom: "Art", 
     tag: "Personal project", 
-    image: ""
+    image: "/img/Art.png",
+    competences: [
+      "Vue Js", 
+      "Three Js"
+    ]
   }, 
   {
-    nom: "La fif", 
-    tag: "Professional project", 
-    image: ""
+    nom: "Abyssal Thoughts", 
+    tag: "Personal project", 
+    image: "/img/abyssalThought.jpeg",
+    competences: [
+      "Vue Js", 
+      "Pinia"
+    ]
   }, 
+  // {
+  //   nom: "La fif", 
+  //   tag: "Professional project", 
+  //   image: ""
+  // }, 
+  // {
+  //   nom: "Usermind", 
+  //   tag: "Professional project", 
+  //   image: ""
+  // }, 
   {
-    nom: "Usermind", 
-    tag: "Professional project", 
-    image: ""
-  }, 
+    nom: "Calceare", 
+    tag: "Student project", 
+    image: "/img/HomeCalceare.jpeg", 
+    competences: [
+      "symfony"
+    ]
+  },
   {
     nom: "Le défi 24 heures", 
     tag: "Student project", 
-    image: ""
-  }
+    image: "/img/HeroDefi24h.jpeg", 
+    competences: [
+      "Vue Js",
+      "Wordpress Rest API"
+    ]
+  },
+  {
+    nom: "Portfolio 2022", 
+    tag: "Personnal project", 
+    image: "/img/Portfolio2022.jpeg",
+    competences: [
+      "Three js"
+    ]
+  }, 
 ])
 
 let tabHighComp = ref(["Fullstack developper", "Digital developper", "Internet chil", "Fullstack developper", "Digital developper", "Internet chil", "Fullstack developper", "Digital developper", "Internet chil"])
 let tabBottomComp = ref(["Vue Js", "Nuxt Js", "Node Js", "CI/CD", "Vue Js", "Nuxt Js", "Node Js", "CI/CD", "Vue Js", "Nuxt Js", "Node Js", "CI/CD"])
 let formattedDate = ref();
 let formattedDay = ref();
+
+const scrollProject = () =>{
+  console.log("oui");
+}
 
 // const handleScroll = async() => {
 //   scrollY.value = window.scrollY;
@@ -283,7 +315,7 @@ onMounted(async() => {
 .bg{
   background-color: var(--black-color);
   width: 100%;
-  height: 100%;
+  height: max-content;
 }
 
 .wrapper-project{
@@ -300,6 +332,7 @@ onMounted(async() => {
   flex-direction: column;
   width: 100%;
   color: white;
+  margin-top: 10vh;
 }
 
 .wrapper-competences .high,
@@ -353,6 +386,11 @@ onMounted(async() => {
 }
 .row-infos p{
   margin: 0;
+}
+
+.row-infos a{
+  text-decoration: none;
+  color: black;
 }
 
 .telNumber span{
@@ -443,6 +481,11 @@ footer{
   text-transform: uppercase;
   margin-bottom: 10vh;
 }
+
+.container-contact a{
+  color: white;
+}
+
 .rs{
   display: flex;
   flex-direction: row;

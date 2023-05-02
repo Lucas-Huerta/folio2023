@@ -1,6 +1,6 @@
 <template>
     <div class="container-project">
-        <div class="project">
+        <div class="project" @mouseenter="showImage" @mouseleave="hideImage">
             <div class="left-project">
                 <span>
                     {{props.projet.tag}}
@@ -8,21 +8,35 @@
                 <h3>{{props.projet.nom}}</h3>
             </div>
             <div class="right-project">
-                <img src="" alt="image project">
+                <span class="col-comp" v-for="comp in props.projet.competences">{{ comp }}</span>
+                <img :src="projet.image" class="project-image" v-show="show">
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
+import { ref } from 'vue';
 
 const props = defineProps({
     projet: Object
 })
 
-onMounted(() => {
-})
+const show = ref(false);
+const mouseX = ref(0);
+const mouseY = ref(0);
+const offset = 20;
+
+const showImage = (event) => {
+    show.value = true;
+    mouseX.value = event.clientX;
+    mouseY.value = event.clientY;
+}
+
+const hideImage = () => {
+    show.value = false;
+}
+
 </script>
 
 <style scoped>
@@ -37,6 +51,7 @@ onMounted(() => {
 }
 
 .project{
+    position: relative;
     width: 80%;
     display: flex;
     flex-direction: row;
@@ -69,5 +84,26 @@ onMounted(() => {
     letter-spacing: 5px;
     font-size: 40px;
     margin: 0;
+}
+
+.right-project{
+    width: 20%;
+}
+
+.col-comp{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    color: white;
+}
+
+.project-image{
+    position: absolute;
+    top: 0;
+    left: 40%;
+    max-width: 300px;
+    max-height: 300px;
 }
 </style>
