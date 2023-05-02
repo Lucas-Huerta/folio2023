@@ -1,7 +1,16 @@
-# Vue 3 + Vite
+# Portfolio 2023 🚀
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Disover my 2023 portfolio made with : 
+* Vite 
+* Vue Js 3
+* Locomotive
 
-## Recommended IDE Setup
+## You can run it by follow commands juste bellow ⬇️
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+### `git clone https://github.com/Lucas-Huerta/folio2023.git`
+### `npm install`
+### `npm run dev`
+
+🚀 Open the link ! 
+
+Thank you for reading! If you have any questions or comments, please feel free to contact me !
