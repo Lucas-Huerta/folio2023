@@ -92,7 +92,7 @@
               <div class="rs">
                 <span><a href="https://www.linkedin.com/in/lucas-huerta13/" target="_blank">Linkedin</a></span>
                 <span><a href="https://github.com/Lucas-Huerta" target="_blank">GitHub</a></span>
-                <span><a href="" target="_blank">CV</a></span>
+                <span><a href="/CV_Huerta_Lucas.pdf" target="_blank">CV</a></span>
               </div>
             </div>
           </div>
@@ -109,7 +109,7 @@ import LocomotiveScroll from 'locomotive-scroll';
 import { ref, onMounted, onUpdated } from 'vue';
 
 const wrapper = ref();
-const scrollY = ref(0);
+// const scrollY = ref(0);
 let imgStar = ref();
 
 let tabProject = ref([
@@ -145,12 +145,12 @@ let tabBottomComp = ref(["Vue Js", "Nuxt Js", "Node Js", "CI/CD", "Vue Js", "Nux
 let formattedDate = ref();
 let formattedDay = ref();
 
-const handleScroll = async() => {
-  scrollY.value = window.scrollY;
-  imgStar.value.style.transform = `rotate(${scrollY.value/5}deg)`;
-  imgStar.value.style.transform = 'all linear';
-  imgStar.value.style.position = 'fixed';
-}
+// const handleScroll = async() => {
+//   scrollY.value = window.scrollY;
+//   imgStar.value.style.transform = `rotate(${scrollY.value/5}deg)`;
+//   imgStar.value.style.transform = 'all linear';
+//   imgStar.value.style.position = 'fixed';
+// }
 
 const locomotive = async() => {
   await new LocomotiveScroll({
@@ -182,7 +182,7 @@ const haveLocalTime = async() =>{
 
 onMounted(async() => {
   // await handleScroll()
-  window.addEventListener('scroll', handleScroll);
+  // window.addEventListener('scroll', handleScroll);
   await locomotive();
   setInterval(haveLocalTime, 1000);
 })
@@ -230,10 +230,10 @@ onMounted(async() => {
 .container-star img{
   position: absolute;
   top: 20%;
-  right: 50%;
-  left: 25%;
-  bottom: 50%;
+  transform: translate(-50%);
+  left: 50%;
   width: 50%;
+  max-width: 40vw;
   height: auto;
   z-index: -1;
 }
@@ -263,7 +263,8 @@ onMounted(async() => {
   top: 0;
   background-color: var(--black-color);
   width: 120vw;
-  height: 100vw;
+  /* width: 100%; */
+  height: 100vh;
   left: 50%;
   border-top-right-radius: 50%;
   border-top-left-radius: 50%;
@@ -271,7 +272,7 @@ onMounted(async() => {
   transform: scale(1) translateX(-50%);
   -webkit-transform-origin: center center;
   transform-origin: center center;
-  z-index: 3;
+  z-index: 0;
 }
 
 .main{
@@ -340,7 +341,7 @@ onMounted(async() => {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-size: 60px;
+  font-size: 90px;
   font-weight: 600;
   font-family: "Inter", sans-serif;
 }
@@ -353,6 +354,11 @@ onMounted(async() => {
 .row-infos p{
   margin: 0;
 }
+
+.telNumber span{
+  transition: all 0.2s linear;
+}
+
 .telNumber:hover span:nth-child(even){
   transition: all 0.2s linear;
   transform: translate3d(-3px, -20px, 0);
