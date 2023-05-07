@@ -34,32 +34,37 @@
           <Project v-for="project in tabProject" :key="project" :projet="project"/>
         </section>
         <section class="wrapper-competences">
-          <div data-scroll data-scroll-direction="horizontal" data-scroll-speed="6" class="high">
+          <div data-scroll data-scroll-direction="horizontal" data-scroll-speed="8" class="high">
             <span v-for="comp in tabHighComp" :key="comp">{{ comp }}</span>
           </div>
-          <div data-scroll data-scroll-direction="horizontal" data-scroll-speed="-6" class="bottom">
+          <div data-scroll data-scroll-direction="horizontal" data-scroll-speed="-8" class="bottom">
             <span v-for="comp in tabBottomComp" :key="comp">{{ comp }}</span>
           </div>
         </section>
       </div>
-      <section class="wrapper-infos">
-        <h3>
-          About
-        </h3>
+      <section class="wrapper-infos" ref="wrapperInfos">
+        <div class="container-titleInfos">
+          <h3 ref="texteInfos">
+            About
+          </h3>
+          <svg width="346" height="201" viewBox="0 0 346 201" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.75987 178.074C1.24885 170.475 2.01557 160.976 7.06321 149.977C12.1059 138.989 21.2901 126.823 34.0101 114.239C59.4344 89.0857 98.582 62.6522 145.442 41.0003C192.303 19.3483 237.806 6.66907 273.439 3.61074C291.267 2.08063 306.483 2.97139 318.119 6.25302C329.767 9.53787 337.498 15.1108 341.009 22.7096C344.52 30.3084 343.753 39.8076 338.705 50.8064C333.663 61.7945 324.478 73.9597 311.758 86.5442C286.334 111.698 247.187 138.131 200.326 159.783C153.466 181.435 107.963 194.114 72.3296 197.172C54.5019 198.703 39.2851 197.812 27.6492 194.53C16.0017 191.245 8.27089 185.672 4.75987 178.074Z" stroke="#2B58DE" stroke-width="6"/>
+          </svg>
+        </div>
         <div class="container-infos">
-          <div class="row-infos">
+          <div class="row-infos" ref="texteInfos">
             <p>Lucas</p> <p>Huerta</p>
           </div>
-          <div class="row-infos">
+          <div class="row-infos" ref="texteInfos">
             <span>21y</span>
             <p>
               Paris
             </p>
           </div>
-          <div class="row-infos telNumber" ref="telNumber">
+          <div class="row-infos telNumber" ref="telNumber" @mouseenter="hoverNumberTel" @mouseleave="delHoverNumberTel">
             <span>+</span><span>3</span><span>3</span><span>7</span><span>8</span><span>3</span><span>8</span><span>0</span><span>6</span><span>3</span><span>5</span><span>7</span>
           </div>
-          <div class="row-infos">
+          <div class="row-infos" ref="texteInfos">
             <p>Spotify</p> <a href="https://open.spotify.com/playlist/1PA80CpOPlx749kXu7AVsV?si=eee6b25097124095" target="_blank">Playlist</a>
           </div>
         </div>
@@ -75,9 +80,7 @@
             </p>
           </div>
           <div class="bottom-section">
-            <div class="container-contact">
-              <a href="mailto:huertalucas13@gmail.com">Contact me </a>
-            </div>
+            <a href="mailto:huertalucas13@gmail.com" class="container-contact">Contact me </a>
             <div class="container-bottom">
               <div class="date">
                 <p>
@@ -86,7 +89,7 @@
                 <span>{{ formattedDay }}</span>
                 <span> {{ formattedDate }}</span>
               </div>
-                <p>
+                <p class="footer-name">
                   Lucas huerta 
                 </p>
               <div class="rs">
@@ -111,6 +114,12 @@ import { ref, onMounted } from 'vue';
 const wrapper = ref();
 // const scrollY = ref(0);
 let imgStar = ref();
+
+// Ref pour stocker wrapper-infos
+let wrapperInfos = ref();
+// Ref pour stocker tous les textes
+let texteInfos = ref([]);
+let telNumber = ref();
 
 let tabProject = ref([
   {
@@ -168,13 +177,25 @@ let tabProject = ref([
   }, 
 ])
 
-let tabHighComp = ref(["Fullstack developper", "Digital developper", "Internet chil", "Fullstack developper", "Digital developper", "Internet chil", "Fullstack developper", "Digital developper", "Internet chil"])
+let tabHighComp = ref(["Fullstack developper", "Internet child", "Fullstack developper", "Internet child", "Fullstack developper", "Internet child"])
 let tabBottomComp = ref(["Vue Js", "Nuxt Js", "Node Js", "CI/CD", "Vue Js", "Nuxt Js", "Node Js", "CI/CD", "Vue Js", "Nuxt Js", "Node Js", "CI/CD"])
 let formattedDate = ref();
 let formattedDay = ref();
 
 const scrollProject = () =>{
   console.log("oui");
+}
+
+
+const hoverNumberTel = () =>{
+  wrapperInfos.value.style.background = 'rgba(0, 0, 0, 0.9)';
+  wrapperInfos.value.style.opacity = 'rgba(0, 0, 0, 0.9)';
+  telNumber.value.style.color = '#FFFFFF';
+}
+
+const delHoverNumberTel = () =>{
+  wrapperInfos.value.style.background = '';
+  telNumber.value.style.color = '#000000';
 }
 
 // const handleScroll = async() => {
@@ -333,6 +354,8 @@ onMounted(async() => {
   width: 100%;
   color: white;
   margin-top: 10vh;
+  justify-content: center;
+  align-items: center;
 }
 
 .wrapper-competences .high,
@@ -342,7 +365,7 @@ onMounted(async() => {
   flex-wrap: nowrap;
   width: max-content;
   /* overflow: auto; */
-  gap: 10vw;
+  gap: 5vw;
 }
 
 .wrapper-competences .high{
@@ -357,14 +380,30 @@ onMounted(async() => {
 
 .wrapper-infos{
   width: 100%;
-  height: max-content;
-  margin-bottom: 10vh;
+  min-height: 100vh;
+  max-height: 100vh;
+  transition: all 0.3s linear;
 }
 
 .wrapper-infos h3{
  font-family: "Dahlia";
  text-align: center;
- font-size: 60px;
+ font-size: 80px;
+ margin-top: 0;
+}
+
+.container-titleInfos{
+  position: relative;
+  z-index: 3;
+}
+
+.container-titleInfos svg{
+  position: absolute;
+  top: -25%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10%;
+  z-index: -1;
 }
 
 .container-infos{
@@ -399,13 +438,13 @@ onMounted(async() => {
 
 .telNumber:hover span:nth-child(even){
   transition: all 0.2s linear;
-  transform: translate3d(-3px, -20px, 0);
+  transform: translate3d(-3px, -30px, 0);
   rotate: 10deg;
 }
 
 .telNumber:hover span:nth-child(odd){
   transition: all 0.2s linear;
-  transform: translate3d(3px, 20px, 0);
+  transform: translate3d(3px, 30px, 0);
   rotate: -10deg;
 }
 
@@ -480,10 +519,28 @@ footer{
   border-radius: 12px;
   text-transform: uppercase;
   margin-bottom: 10vh;
+  transition: all 0.2s linear;
+  color: white;
+  font-weight: 500;
+  min-width: max-content;
+  max-width: max-content;
 }
 
-.container-contact a{
-  color: white;
+.container-contact::after{
+  content: "-->";
+  display: none;
+  transition: all 0.2s linear;
+}
+
+.container-contact:hover{
+  display: flex;
+  flex-direction: row;
+  transition: all 0.2s linear;
+  gap: 2vw;
+}
+
+.container-contact:hover::after{
+  display: flex;
 }
 
 .rs{
@@ -499,8 +556,9 @@ footer{
   color: white;
 }
 
-.container-contact p{
-  margin: 0;
+.footer-name{
+  font-family: 'Dahlia';
+  font-size: 35px;
 }
 
 .date{
