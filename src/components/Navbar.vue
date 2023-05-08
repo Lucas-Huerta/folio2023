@@ -22,10 +22,16 @@ import { ref } from 'vue';
 const emits = defineEmits(['scrollProject', 'scrollContact'])
 let navbar = ref();
 
+/**
+ * Appel emit qui va le transmettre à App.vue
+ */
 const scrollWorks = () => {
     emits('scrollProject');
 }
 
+/**
+ * Appel emit qui va le transmettre à App.vue
+ */
 const scrollContact = () => {
     emits('scrollContact');
 }

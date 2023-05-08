@@ -25,9 +25,12 @@ const props = defineProps({
 const show = ref(false);
 const mouseX = ref(0);
 const mouseY = ref(0);
-const offset = 20;
 let projectImg = ref();
 
+/**
+ * Permet de show l'image projet et de lui assigner les coordonées x et y de la row projet 
+ * @param {*} event event lors de l'hover projet
+ */
 const showImage = async(event) => {
     show.value = true;
     mouseX.value = await event.clientX;
@@ -36,6 +39,9 @@ const showImage = async(event) => {
     projectImg.value.style.top = mouseY.value % 10 + '%';
 }
 
+/**
+ * Unshow l'image projet
+ */
 const hideImage = () => {
     show.value = false;
 }
