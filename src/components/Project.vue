@@ -1,6 +1,6 @@
 <template>
     <div class="container-project">
-        <div class="project" @mouseenter="showImage" @mouseleave="hideImage">
+        <div class="project" @mouseover="showImage" @mouseleave="hideImage">
             <div class="left-project">
                 <span>
                     {{props.projet.tag}}
@@ -9,7 +9,7 @@
             </div>
             <div class="right-project">
                 <span class="col-comp" v-for="comp in props.projet.competences">{{ comp }}</span>
-                <img :src="projet.image" class="project-image" v-show="show">
+                <img :src="projet.image" class="project-image" v-show="show" ref="projectImg">
             </div>
         </div>
     </div>
@@ -26,11 +26,14 @@ const show = ref(false);
 const mouseX = ref(0);
 const mouseY = ref(0);
 const offset = 20;
+let projectImg = ref();
 
-const showImage = (event) => {
+const showImage = async(event) => {
     show.value = true;
-    mouseX.value = event.clientX;
-    mouseY.value = event.clientY;
+    mouseX.value = await event.clientX;
+    mouseY.value = await event.clientY;
+    projectImg.value.style.right = mouseX.value % 10 + '%';
+    projectImg.value.style.top = mouseY.value % 10 + '%';
 }
 
 const hideImage = () => {
@@ -101,8 +104,8 @@ const hideImage = () => {
 
 .project-image{
     position: absolute;
-    top: 0;
-    left: 40%;
+    /* top: 0;
+    left: 40%; */
     max-width: 300px;
     max-height: 300px;
 }

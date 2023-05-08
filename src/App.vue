@@ -1,6 +1,6 @@
 <template>
-  <div ref="wrapper" class="wrapper">
-    <Navbar @scrollProject="scrollProject" @scrollContact="scrollProject" />
+  <div ref="wrapper" class="wrapper" id="wrapper">
+    <Navbar @scrollProject="scrollProject" @scrollContact="scrollContact" data-scroll data-scroll-sticky data-scroll-target="#wrapper" data-scroll-speed="3"/>
     <section class="hero-wrapper">
       <div class="container-title">
         <div>
@@ -42,7 +42,7 @@
           </div>
         </section>
       </div>
-      <section class="wrapper-infos" ref="wrapperInfos">
+      <section class="wrapper-infos" ref="wrapperInfos" id="wrapperInfos">
         <div class="container-titleInfos">
           <h3 ref="texteInfos">
             About
@@ -111,8 +111,8 @@ import Project from './components/Project.vue';
 import LocomotiveScroll from 'locomotive-scroll';
 import { ref, onMounted } from 'vue';
 
+let scroll = ref();
 const wrapper = ref();
-// const scrollY = ref(0);
 let imgStar = ref();
 
 // Ref pour stocker wrapper-infos
@@ -139,17 +139,7 @@ let tabProject = ref([
       "Vue Js", 
       "Pinia"
     ]
-  }, 
-  // {
-  //   nom: "La fif", 
-  //   tag: "Professional project", 
-  //   image: ""
-  // }, 
-  // {
-  //   nom: "Usermind", 
-  //   tag: "Professional project", 
-  //   image: ""
-  // }, 
+  },
   {
     nom: "Calceare", 
     tag: "Student project", 
@@ -182,31 +172,42 @@ let tabBottomComp = ref(["Vue Js", "Nuxt Js", "Node Js", "CI/CD", "Vue Js", "Nux
 let formattedDate = ref();
 let formattedDay = ref();
 
+/**
+ * Use Locomotive to scroll to #project section
+ */
 const scrollProject = () =>{
-  console.log("oui");
+  scroll.value.scrollTo('#project')
 }
 
+/**
+ * Use Locomotive to scroll to #wrapperInfos section
+ */
+const scrollContact = () =>(
+  scroll.value.scrollTo('#wrapperInfos')
+) 
 
+/**
+ * Animation au hover numéro téléphone
+ */
 const hoverNumberTel = () =>{
   wrapperInfos.value.style.background = 'rgba(0, 0, 0, 0.9)';
   wrapperInfos.value.style.opacity = 'rgba(0, 0, 0, 0.9)';
   telNumber.value.style.color = '#FFFFFF';
 }
 
+/**
+ * Annuler l'animation 
+ */
 const delHoverNumberTel = () =>{
   wrapperInfos.value.style.background = '';
   telNumber.value.style.color = '#000000';
 }
 
-// const handleScroll = async() => {
-//   scrollY.value = window.scrollY;
-//   imgStar.value.style.transform = `rotate(${scrollY.value/5}deg)`;
-//   imgStar.value.style.transform = 'all linear';
-//   imgStar.value.style.position = 'fixed';
-// }
-
+/**
+ * Création du scroll Locomotive
+ */
 const locomotive = async() => {
-  await new LocomotiveScroll({
+  scroll.value = await new LocomotiveScroll({
     el: wrapper.value,
     // el: document.querySelector('[data-scroll-container]'),
     // el: document.getElementById('app'),
@@ -214,14 +215,20 @@ const locomotive = async() => {
   });
 }
 
+/**
+ * Formatage de la date actuelle dans le footer
+ */
 const haveLocalTime = async() =>{
   const now = new Date();
+
+  // Heure minuets secondes
   const formatter = new Intl.DateTimeFormat('fr', { 
     hour: 'numeric', 
     minute: 'numeric', 
     second: 'numeric' 
   });
 
+  // Mois années, jours
   const formatterDay = new Intl.DateTimeFormat('en', { 
     weekday: 'long',
     year: 'numeric',
@@ -234,8 +241,6 @@ const haveLocalTime = async() =>{
 }
 
 onMounted(async() => {
-  // await handleScroll()
-  // window.addEventListener('scroll', handleScroll);
   await locomotive();
   setInterval(haveLocalTime, 1000);
 })
@@ -407,7 +412,7 @@ onMounted(async() => {
 }
 
 .container-infos{
-  width: 60%;
+  width: max-content;
   height: 100%;
   margin: auto;
   display: flex;

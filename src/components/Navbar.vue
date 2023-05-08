@@ -6,10 +6,10 @@
             </h1>
         </div>
         <div class="nav-right">
-            <p @click="yesScroll()">
+            <p @click="scrollWorks()">
                 Works
             </p>
-            <p @click="yesScroll()">
+            <p @click="scrollContact()">
                 Contact
             </p>
         </div>
@@ -17,33 +17,24 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 
 const emits = defineEmits(['scrollProject', 'scrollContact'])
-
 let navbar = ref();
-// const scrollY = ref(0);
 
-const yesScroll = () => {
+const scrollWorks = () => {
     emits('scrollProject');
 }
 
-// function handleScroll() {
-//   scrollY.value = window.scrollY;
-//   if (scrollY.value > 0) {
-//     navbar.value.style.zIndex = 10;
-//     navbar.value.style.backgroundColor = 'white';
-//   }
-// }
-
-// onMounted(() => {
-//   window.addEventListener('scroll', handleScroll)
-// })
+const scrollContact = () => {
+    emits('scrollContact');
+}
 </script>
 
 <style scoped>
 
 .nav-wrapper{
+    background-color: white;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -54,7 +45,8 @@ const yesScroll = () => {
     border-bottom: 2px solid black;
     padding-top: 2vh;
     text-transform: uppercase;
-    /* position: fixed; */
+    z-index: 10;
+    position: fixed;
 }
 .nav-right{
     display: flex;
@@ -75,6 +67,7 @@ const yesScroll = () => {
 .nav-right p{
     margin: 0 2vw;
     font-size: 20px;
+    cursor: pointer;
 }
 
 </style>
