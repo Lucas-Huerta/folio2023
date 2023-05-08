@@ -388,13 +388,16 @@ onMounted(async() => {
   min-height: 100vh;
   max-height: 100vh;
   transition: all 0.3s linear;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .wrapper-infos h3{
  font-family: "Dahlia";
  text-align: center;
  font-size: 80px;
- margin-top: 0;
 }
 
 .container-titleInfos{
@@ -404,10 +407,10 @@ onMounted(async() => {
 
 .container-titleInfos svg{
   position: absolute;
-  top: -25%;
+  top: 15%;
   left: 50%;
   transform: translateX(-50%);
-  width: 10%;
+  width: 100%;
   z-index: -1;
 }
 
@@ -519,7 +522,9 @@ footer{
 }
 
 .container-contact{
-  padding: 1vh 3vw;
+  /* padding: 1% 5%; */
+  width: 20%;
+  height: 5vh;
   background-color: var(--active-color);
   border-radius: 12px;
   text-transform: uppercase;
@@ -527,25 +532,27 @@ footer{
   transition: all 0.2s linear;
   color: white;
   font-weight: 500;
-  min-width: max-content;
-  max-width: max-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s linear;
+}
+
+.container-contact::before{
+  content: "-->";
+  opacity: 0;
 }
 
 .container-contact::after{
   content: "-->";
-  display: none;
+  opacity: 0;
   transition: all 0.2s linear;
-}
-
-.container-contact:hover{
-  display: flex;
-  flex-direction: row;
-  transition: all 0.2s linear;
-  gap: 2vw;
 }
 
 .container-contact:hover::after{
-  display: flex;
+  opacity: 1;
+  margin-left: 10%;
 }
 
 .rs{
