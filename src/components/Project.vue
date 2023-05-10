@@ -15,7 +15,7 @@
                     <!-- <img :src="projet.image"> -->
                 </div>
             </div>
-            <div class="right-project">
+            <div class="right-project" ref="right">
                 <span class="col-comp" v-for="comp in props.projet.competences">{{ comp }}</span>
                 <img :src="projet.image" class="project-image" v-show="show" ref="projectImg">
             </div>
@@ -36,6 +36,7 @@ const mouseY = ref(0);
 let projectImg = ref();
 let infosSupp = ref();
 let row = ref();
+let right = ref();
 
 /**
  * Permet de show l'image projet et de lui assigner les coordonées x et y de la row projet 
@@ -56,13 +57,18 @@ const hideImage = () => {
     show.value = false;
 }
 
+/**
+ * Au clic sur la section projet => changement des styles sur les refs associées afin de montrer la description du projet
+ */
 const clickProject = () =>{
     if (infosSupp.value.style.opacity == '0') {
         infosSupp.value.style.opacity = '1';
         infosSupp.value.style.width = '100%';
         row.value.style.flexDirection = 'column';
         row.value.style.alignItems = 'start';
+        right.value.style.marginBottom = '2%';
     }else{
+        // Comme la transition dure 1s, un timeout d'1s est assigné afin de ne pas voir le changement de style
         setTimeout(() =>{
             row.value.style.transition = 'all 1s';
             row.value.style.flexDirection = 'row';
@@ -70,6 +76,7 @@ const clickProject = () =>{
             row.value.style.alignItems = 'flex-end';
         }, 1000);
         infosSupp.value.style.opacity = '0';
+        right.value.style.marginBottom = '0';
     }
 }
 
@@ -98,12 +105,6 @@ const clickProject = () =>{
    margin-top: O;
    width: 90%;
 }
-
-/* .infosSupp img {
-    width: 50%;
-    height: auto;
-} */
-
 .project{
     position: relative;
     width: 80%;
@@ -111,7 +112,7 @@ const clickProject = () =>{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     transition: all 1s;
     border-bottom: 1px solid rgba(255, 255, 255, 0.171);
 }
@@ -151,6 +152,7 @@ const clickProject = () =>{
     padding: 2px 2vw;
     background-color: var(--active-color);
     border-radius: 12px;
+    text-transform: uppercase;
 }
 
 .left-project h3{
@@ -163,6 +165,7 @@ const clickProject = () =>{
 
 .right-project{
     width: 20%;
+    transition: all 1.5s;
 }
 
 .col-comp{

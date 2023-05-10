@@ -1,7 +1,7 @@
 <template>
     <nav ref="navbar" class="nav-wrapper">
         <div class="nav-left">
-            <h1>
+            <h1 @click="scrollHome()">
                 Lucas Huerta
             </h1>
         </div>
@@ -19,7 +19,7 @@
 <script setup>
 import { ref } from 'vue';
 
-const emits = defineEmits(['scrollProject', 'scrollContact'])
+const emits = defineEmits(['scrollProject', 'scrollContact', 'scrollHome'])
 let navbar = ref();
 
 /**
@@ -35,6 +35,14 @@ const scrollWorks = () => {
 const scrollContact = () => {
     emits('scrollContact');
 }
+
+/**
+ * Appel emit qui va le transmettre à App.vue
+ */
+const scrollHome = () => {
+    emits('scrollHome');
+}
+
 </script>
 
 <style scoped>
@@ -62,6 +70,7 @@ const scrollContact = () => {
 .nav-left h1{
     font-size: 30px;
     margin: 0 2vw;
+    cursor: pointer;
 }
 
 .nav-left{

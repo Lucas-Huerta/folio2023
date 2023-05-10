@@ -1,7 +1,7 @@
 <template>
   <div ref="wrapper" class="wrapper" id="wrapper">
-    <Navbar @scrollProject="scrollProject" @scrollContact="scrollContact" data-scroll data-scroll-sticky data-scroll-target="#wrapper" data-scroll-speed="3"/>
-    <section class="hero-wrapper">
+    <Navbar @scrollProject="scrollProject" @scrollContact="scrollContact" @scrollHome="scrollHome" data-scroll data-scroll-sticky data-scroll-target="#wrapper" data-scroll-speed="3"/>
+    <section class="hero-wrapper" id="wrapperHero">
       <div class="container-title">
         <div>
           <h1>
@@ -65,7 +65,7 @@
             <span>+</span><span>3</span><span>3</span><span>7</span><span>8</span><span>3</span><span>8</span><span>0</span><span>6</span><span>3</span><span>5</span><span>7</span>
           </div>
           <div class="row-infos" ref="texteInfos">
-            <p>Spotify</p> <a href="https://open.spotify.com/playlist/1PA80CpOPlx749kXu7AVsV?si=eee6b25097124095" target="_blank">Playlist</a>
+            <p>Spotify</p> <a href="https://open.spotify.com/playlist/1PA80CpOPlx749kXu7AVsV?si=eee6b25097124095" class="linkSpotify" target="_blank">Playlist</a>
           </div>
         </div>
       </section>
@@ -124,7 +124,7 @@ let telNumber = ref();
 let tabProject = ref([
   {
     nom: "Art", 
-    tag: "Personal project", 
+    tag: "Personal", 
     image: "/img/Art.png",
     description: "Ce projet est un projet fait en Vue Js avec de l'art génératif en Three Js. J'ai voulu représenter mes peintres favoris et leurs différentes oeuvres, le tout en m'amusant !", 
     competences: [
@@ -134,7 +134,7 @@ let tabProject = ref([
   }, 
   {
     nom: "Abyssal Thoughts", 
-    tag: "Personal project", 
+    tag: "Personal", 
     image: "/img/abyssalThought.jpeg",
     description: "Ce projet est un projet fait en Vue Js avec un store avec Pinia. Un ami qui est en étude de webdesign m'a envoyé sa maquette et je me suis amusé à l'intégrer", 
     competences: [
@@ -144,7 +144,7 @@ let tabProject = ref([
   },
   {
     nom: "Calceare", 
-    tag: "Student project", 
+    tag: "Student", 
     image: "/img/HomeCalceare.jpeg", 
     description: "Projet étudiant à Hetic, ce projet à été fait avec Symfony. Il m'a apporté en plus une certaine vision en gestion de projet et workflow", 
     competences: [
@@ -153,7 +153,7 @@ let tabProject = ref([
   },
   {
     nom: "Le défi 24 heures", 
-    tag: "Student project", 
+    tag: "Student", 
     image: "/img/HeroDefi24h.jpeg", 
     description: "Projet étudiant réalisé en deuxième année de DUT MMI, ce projet avait pour but de réunir un front en Vue Js avec un wordpress headless en backn afin de gérer l'événement du Défi 24 heures et de tous les étudiants participants à ce dernier !", 
     competences: [
@@ -163,7 +163,7 @@ let tabProject = ref([
   },
   {
     nom: "Portfolio 2022", 
-    tag: "Personnal project", 
+    tag: "Personnal", 
     image: "/img/Portfolio2022.jpeg",
     description: "Portfolio personnel réalisé en fin de deuxième année de DUT MMI", 
     competences: [
@@ -190,6 +190,13 @@ const scrollProject = () =>{
 const scrollContact = () =>(
   scroll.value.scrollTo('#wrapperInfos')
 ) 
+
+/**
+ * Use Locomotive to scroll to #wrapperHero section
+ */
+const scrollHome = () => {
+  scroll.value.scrollTo('#wrapperHero', {disableLerp: false});
+}
 
 /**
  * Animation au hover numéro téléphone
@@ -440,9 +447,9 @@ onMounted(async() => {
   margin: 0;
 }
 
-.row-infos a{
-  text-decoration: none;
+.row-infos .linkSpotify{
   color: black;
+  position: relative;
 }
 
 .telNumber span{
@@ -464,6 +471,7 @@ onMounted(async() => {
 footer{
   width: 100%;
   height: 100%;
+  padding-bottom: 5vh;
 }
 
 .footer-section{
@@ -497,6 +505,7 @@ footer{
   justify-content: space-between;
   align-items: end;
   margin-right: 5vw;
+  margin-bottom: 2vh;
 }
 
 .container-bottom p{
@@ -569,8 +578,26 @@ footer{
 }
 
 .rs a{
-  text-decoration: none;
   color: white;
+  position: relative;
+  transition: all 2s ease-out;
+}
+
+.rs a::before{
+  transition: all 0.2s ease-out;
+  content: "";
+  background-color: white;
+  position: absolute;
+  left: 0%;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  opacity: 0;
+}
+
+.rs a:hover::before{
+  opacity: 1;
+  width: 100%;
 }
 
 .footer-name{
