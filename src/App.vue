@@ -95,7 +95,7 @@
               <div class="rs">
                 <span><a href="https://www.linkedin.com/in/lucas-huerta13/" target="_blank">Linkedin</a></span>
                 <span><a href="https://github.com/Lucas-Huerta" target="_blank">GitHub</a></span>
-                <span><a href="/CV_Huerta_Lucas.pdf" target="_blank">CV</a></span>
+                <span><a href="/CV_Lucas.pdf" target="_blank">CV</a></span>
               </div>
             </div>
           </div>
@@ -126,7 +126,7 @@ let tabProject = ref([
     nom: "Art", 
     tag: "Personal", 
     image: "/img/Art.png",
-    description: "Ce projet est un projet fait en Vue Js avec de l'art génératif en Three Js. J'ai voulu représenter mes peintres favoris et leurs différentes oeuvres, le tout en m'amusant !", 
+    description: "Ce projet est une application développée en utilisant Vue.js et intègre des éléments d'art génératif basés sur Three.js. L'objectif était de présenter une représentation artistique des peintres que j'apprécie ainsi que de leurs diverses œuvres.", 
     competences: [
       "Vue Js", 
       "Three Js"
@@ -136,7 +136,7 @@ let tabProject = ref([
     nom: "Abyssal Thoughts", 
     tag: "Personal", 
     image: "/img/abyssalThought.jpeg",
-    description: "Ce projet est un projet fait en Vue Js avec un store avec Pinia. Un ami qui est en étude de webdesign m'a envoyé sa maquette et je me suis amusé à l'intégrer", 
+    description: "Ce projet est un site développé en utilisant Vue.js, avec une architecture de store mise en place grâce à Pinia. Un ami, actuellement étudiant en webdesign, m'a partagé sa maquette d'un projet fictif et, j'ai pris plaisir à l'intégrer.", 
     competences: [
       "Vue Js", 
       "Pinia"
@@ -146,7 +146,7 @@ let tabProject = ref([
     nom: "Calceare", 
     tag: "Student", 
     image: "/img/HomeCalceare.jpeg", 
-    description: "Projet étudiant à Hetic, ce projet à été fait avec Symfony. Il m'a apporté en plus une certaine vision en gestion de projet et workflow", 
+    description: "Ce projet a été réalisé dans le cadre de mes études à HETIC Paris et a été développé en utilisant le framework PHP Symfony. En plus de son aspect technique, ce projet m'a permis d'acquérir une vision approfondie de la gestion de projet et des processus de workflow en équipe.", 
     competences: [
       "Symfony"
     ]
@@ -155,7 +155,7 @@ let tabProject = ref([
     nom: "Le défi 24 heures", 
     tag: "Student", 
     image: "/img/HeroDefi24h.jpeg", 
-    description: "Projet étudiant réalisé en deuxième année de DUT MMI, ce projet avait pour but de réunir un front en Vue Js avec un wordpress headless en backn afin de gérer l'événement du Défi 24 heures et de tous les étudiants participants à ce dernier !", 
+    description: "Ce projet a été réalisé en tant que projet étudiant lors de ma deuxième année de DUT MMI. L'objectif principal était de créer un site web en utilisant Vue.js en front-end et WordPress en mode headless en tant que back-end. Cette application visait à gérer l'événement du Défi 24 heures dans le but que tous les étudiants participent à cet événement.", 
     competences: [
       "Vue Js",
       "Wordpress Rest API"
@@ -165,7 +165,7 @@ let tabProject = ref([
     nom: "Portfolio 2022", 
     tag: "Personnal", 
     image: "/img/Portfolio2022.jpeg",
-    description: "Portfolio personnel réalisé en fin de deuxième année de DUT MMI", 
+    description: "Portfolio personnel réalisé en fin de deuxième année de DUT MMI avec lequel j'ai pu découvrir et améliorer mes compétences en Three js", 
     competences: [
       "Three js"
     ]
