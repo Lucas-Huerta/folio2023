@@ -1,6 +1,7 @@
 <template>
     <div class="container-project">
-        <div class="project" @mouseover="showImage" @mouseleave="hideImage" @click="clickProject()" ref="rowProject">
+        <div class="project" @mousemove="showImage" @mouseleave="hideImage" @click="clickProject()" ref="rowProject">
+            <img :src="projet.image" class="project-image" v-show="show" ref="projectImg" />
             <div class="row" ref="row" style="flex-direction: row; align-items: flex-end;">
                 <div class="left-project">
                     <span>
@@ -12,12 +13,10 @@
                     <p style="margin-top: 0;">
                         {{props.projet.description}}
                     </p>
-                    <!-- <img :src="projet.image"> -->
                 </div>
             </div>
             <div class="right-project" ref="right">
                 <span class="col-comp" v-for="comp in props.projet.competences">{{ comp }}</span>
-                <img :src="projet.image" class="project-image" v-show="show" ref="projectImg">
             </div>
         </div>
     </div>
@@ -30,6 +29,7 @@ const props = defineProps({
     projet: Object
 })
 
+let rowProject = ref();
 const show = ref(false);
 const mouseX = ref(0);
 const mouseY = ref(0);
@@ -43,11 +43,13 @@ let right = ref();
  * @param {*} event event lors de l'hover projet
  */
 const showImage = async(event) => {
+    const parentRect = rowProject.value.getBoundingClientRect();
     show.value = true;
-    mouseX.value = await event.clientX;
-    mouseY.value = await event.clientY;
-    projectImg.value.style.right = mouseX.value % 10 + '%';
-    projectImg.value.style.top = mouseY.value % 10 + '%';
+    mouseX.value = await event.clientX - parentRect.left;
+    mouseY.value = await event.clientY - parentRect.top;
+    
+    projectImg.value.style.left = `${(mouseX.value / parentRect.width) * 100}%`;
+    projectImg.value.style.top = `${(mouseY.value / parentRect.height) * 100}%`;
 }
 
 /**
@@ -72,7 +74,7 @@ const clickProject = () =>{
         setTimeout(() =>{
             row.value.style.transition = 'all 1s';
             row.value.style.flexDirection = 'row';
-            infosSupp.value.style.width = '50%';
+            infosSupp.value.style.width = '65%';
             row.value.style.alignItems = 'flex-end';
         }, 1000);
         infosSupp.value.style.opacity = '0';
@@ -103,8 +105,8 @@ const clickProject = () =>{
 
 .infosSupp p {
    margin-top: O;
-   width: 90%;
 }
+
 .project{
     position: relative;
     width: 80%;
@@ -183,5 +185,6 @@ const clickProject = () =>{
     left: 40%; */
     max-width: 300px;
     max-height: 300px;
+    transition: all 0,2s linear;
 }
 </style>

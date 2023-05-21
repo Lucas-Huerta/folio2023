@@ -133,6 +133,16 @@ let tabProject = ref([
     ]
   }, 
   {
+    nom: "Projet client", 
+    tag: "Professional", 
+    description: "Projet client appartenant à l'agence 40/60. Ce projet est développé avec Nuxt Js 3 couplé à du Typescript et Graph ql pour les requêtes vers l'API. À travers ce projet, j'ai pu découvrir et apprécier le typescript, il m'a aussi permit de pousser mes compétences en Nuxt Js 3 ",
+    competences: [
+      "Nuxt Js 3", 
+      "Typescipt", 
+      "Graph Ql"
+    ]
+  },
+  {
     nom: "Abyssal Thoughts", 
     tag: "Personal", 
     image: "/img/abyssalThought.jpeg",
@@ -142,6 +152,17 @@ let tabProject = ref([
       "Pinia"
     ]
   },
+  {
+    nom: "Projet interne", 
+    tag: "Professional", 
+    description: "Projet interne en développement appartenant à l'agence 40/60. Ce projet est développé en Vue Js 3, couplé avec un backend en Node Js express et, avec une base de donnée en Postgre Sql. Ce projet m'a permit et, me permet encore de m'améliorer avec le framework Vue Js et Node js grâce à sa complexitée autant en front qu'en back", 
+    competences: [
+      "Vue Js", 
+      "Pinia", 
+      "Node Js", 
+      "Postgre"
+    ]
+  },  
   {
     nom: "Calceare", 
     tag: "Student", 
